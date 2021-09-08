@@ -1,0 +1,17 @@
+[
+    {
+        "id":1,
+        "nom":"Koribeche",
+        "prenom":"Amir"
+    },
+    {
+        "id":2,
+        "nom":"Guery",
+        "prenom":"Irina"
+    },
+    {
+        "id":3,
+        "nom":"Belta-nivelle",
+        "prenom":"Yacoub"
+    }
+]

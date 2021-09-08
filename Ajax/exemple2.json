@@ -1,0 +1,23 @@
+[
+    {
+        "nom":"Don",
+        "username":"Donna",
+        "street":"Savar",
+        "city":"Paris",
+        "zipcode":"75000"
+    },
+    {
+        "nom":"Marta",
+        "username":"Mars",
+        "street":"Savar",
+        "city":"Paris",
+        "zipcode":"75012"
+    },
+    {
+        "nom":"Jaque",
+        "username":"lune",
+        "street":"DeGaulle",
+        "city":"Paris",
+        "zipcode":"75014"
+    }
+]

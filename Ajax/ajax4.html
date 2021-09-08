@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Get data</button>
+    <div id="affichage"></div>
+
+    <script>
+        document.getElementById("btn").addEventListener('click',
+        chargerJson())
+        function chargerJson(){
+            let xhr = new XMLHttpRequest()
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/users")
+            xhr.send()
+            xhr.onload = function() {
+                if(this.status ==200){
+                
+                    let resultat = JSON.parse(this.responseText)
+                    console.log(resultat)
+                    let affichage=""
+                    resultat.forEach(user => {
+                        let{username, nom, address: {city}, address: {zipcode}, address: {street}}= user
+                        affichage +=  `<ul>
+                        <li> username : ${user.username}</li>
+                        <li> street : ${user.street}</li>
+                        <li> city : ${user.city}</li>
+                        <li> zipcode : ${user.zipcode}</li>
+                        <li> nom : ${user.nom}</li>
+                        </ul>`
+                    });
+
+                    document.getElementById("affichage").innerHTML = affichage
+                            
+                        }
+                    }
+            }
+        
+    </script>
+
+</body>
+</html>

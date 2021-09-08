@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Get data</button>
+    <div id="affichage"></div>
+
+    <script>
+        document.getElementById("btn").addEventListener('click',
+        chargerJson())
+        function chargerJson(){
+            let xhr = new XMLHttpRequest()
+            xhr.open("GET", "example.txt")
+            xhr.send()
+            xhr.onload = function() {
+                if(this.status ==200){
+                    console.log(typeof this.responseText)
+                    let resultat =""
+                    resultat.forEach(utilisateur => {
+                        affichage += <li> ${utilisateur.nom}</li>
+                    });
+
+                    document.getElementById("affichage").innerHTML = affichage
+                            
+                        }
+                    }
+
+            }
+        
+
+    </script>
+
+</body>
+</html>
