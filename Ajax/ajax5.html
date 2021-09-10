@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage donnée BD</title>
+</head>
+<body>
+    <button id="btn">Get Data</button>
+    <div id="affichage"></div>
+
+    <script>
+        document.getElementById("btn").addEventListener("click",afficherBD)
+
+        function afficherBD() {
+        new Promise((resolve,reject)=>{
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET","getData.php");
+            xhr.send();
+            xhr.onload = function(){
+                if(this.status==200){
+
+                        resolve(this.responseText)
+                }
+                else{
+                    rejet(this.status)
+                }
+                }
+            }
+            ).then((valeur)=>{
+                console.log(valeur)
+                let resultat = JSON.parse(valeur)
+                let affichage=""
+                resultat.forEach(utilisateur => {
+                    affichage+= `<li> ${utilisateur.nom}</li>`
+
+                });
+                document.getElementById("affichage").innerHTML=affichage
+            
+            }).catch(erreur =>{
+                    document.getElementById("affichage").
+                    innerHTML=` Erreur : ${erreur}`
+            })
+        }
+
+    </script>
+
+    
+</body>
+</html>

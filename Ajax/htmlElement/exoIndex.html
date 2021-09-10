@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composant WEB</title>
+
+    <style>
+        h3{
+            color:red
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <h3>Composant WEB</h3>
+    <test-tag></test-tag>
+    <script src="script.js"></script>
+    <button id= "getData">click</button>
+        
+    <div id="affichage"></div>
+    <script>
+        document.getElementById("getData").addEventListener("click",getUser)
+
+        function getUser(){
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET","https://randomuser.me/api/?results=10")
+            xhr.send();
+
+            xhr.onload = function () {
+                if(this.status ==200){
+                   let resultat = JSON.parse(this.responseText)
+                    //let user = resultat.results[0]
+                    //console.log(user)
+
+                    let users = resultat.results
+                let affichage=""
+                console.log (users)
+                users.forEach(user => {
+                        let { name : {first} , name : {last} , email,
+                    picture : {large}} = user
+                    affichage += `<affichage-utilisateur nom=${first} prenom=${last} photo=${large}>
+                                  </affichage-utilisateur>`  
+                    
+                    }); 
+                    console.log(affichage)  
+                    document.getElementById("affichage").innerHTML=affichage
+                
+                }
+            }
+        }
+
+        function getUserFetch(){
+            fetch("https://randomuser.me/api/?results=10")
+            .then(reponse => reponse.json())
+            .then(resultat => {
+
+                let users = resultat.results
+                let affichage=""
+                console.log (users)
+                users.forEach(user => {
+                        let { name : {first} , name : {last} , email,
+                    picture : {large}} = user
+                    affichage += `<affichage-utilisateur nom=${first} prenom=${last} photo=${large}>
+                                  </affichage-utilisateur>`  
+                    
+                    }); 
+                    console.log(affichage)  
+                    document.getElementById("affichage").innerHTML=affichage
+                })
+        }
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serveur PHP</title>
+</head>
+<body>
+    <h2>Formulaire Action/Methodeh2>
+    <form action="serveur.php" method="get">
+    <input type="text" name="nom"
+    placeholder="nom">
+    <br>
+    <input type="submit" value="submit">
+</form>
+<br>
+<h2>Formulaire GET</h2>
+<form  id="getForm" >
+    <input type="text" name="nom" placeholder="nom" id="nomGet">
+    <br><br>
+    <input type="text" name="prenom" placeholder="prenom" id="prenomGet">
+    <br><br>
+    <input type="submit" value="submit">
+</form>
+<br><br>
+
+<h3> FORMULAIRE POST</h3>
+<form id="postForm">
+        <input type="text" name="nomPost" placeholder="nom" id="nomPost">
+        <br> <br>
+        <input type="text" name="prenomPost" placeholder="prenom" id="prenomPost">
+        <br><br>
+        <input type="submit" value="submit">
+</form>
+
+
+<script>
+    document.getElementById("getForm").addEventListener('submit', submitGet);
+    document.getElementById("postForm").addEventListener('submit', submitPost);
+    
+    function submitGet(e){
+        e.preventDefault()
+
+        let nom = document.getElementById("nomGet").value
+        let prenom = document.getElementById("prenomGet").value
+
+        let xhr = new XMLHttpRequest();
+        //xhr.open("GET","serveur.php")
+        xhr.open("GET",`serveur.php?nom=${nom}&prenom=${prenom}`)
+        xhr.send()
+        xhr.onload = function(){
+            if(this.status == 200){
+                console.log(this.responseText)
+            }
+        }
+    }
+    function submitPost(e){
+        e.preventDefault()
+
+        let nom = document.getElementById("nomPost").value
+        let prenom = document.getElementById("prenomPost").value
+
+        let xhr = new XMLHttpRequest();
+        //xhr.open("GET","serveur.php")
+        xhr.open("POST","serveur.php")
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(`nomPost=${nom}&prenomPost=${prenom}`
+    )
+        xhr.onload = function(){
+            if(this.status == 200){
+                console.log(this.responseText)
+            }
+        }  
+    }
+
+</script>
+
+</body>
+</html>
